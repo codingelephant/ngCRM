@@ -1,0 +1,51 @@
+<div class="container-fluid py-5">
+    <div class="row">
+    <nav class="col-md-2 my-1 d-none d-md-block bg-light sidebar">
+     <app-sidebar></app-sidebar>
+    </nav>
+
+      <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+          <h1 class="h2">Customers</h1>
+
+          <a class="btn btn-success" routerLink="/create">Add New</a>
+        </div>
+
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Id</th>
+              <th>Name</th>
+              <th>Phone</th>
+              <th>Email</th>
+              <th>Company Name</th>
+              <th>Address</th>
+              <th>Remarks</th>
+              <th>Created At</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+              <tr>
+                  <td>1</td>
+                  <td>Mya Mya</td>
+                  <td>0937397373</td>
+                  <td>myamya@gmail.com</td>
+                  <td>Ooredoo </td>
+                  <td>No.13, Bogyoke Road, Sule</td>
+                  <td>-</td>
+                  <td>3 days ago</td>
+                  <td>
+                    <a class="btn btn-primary btn-sm mx-1" href="">Edit</a>
+                    <a class="btn btn-danger btn-sm" href="">Remove</a>
+                  </td>
+                </tr>
+          </tbody>
+        </table>
+
+
+
+      </main>
+    </div>
+  </div>
