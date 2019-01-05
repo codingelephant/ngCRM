@@ -15,8 +15,16 @@ export class CustomerService {
     return this.http.post("http://localhost:3000/api/accounts", data);
   }
 
+  updateCustomer(data , id){
+    return this.http.put("http://localhost:3000/api/accounts/"+id+"/update", data);
+  }
+
   getCustomers(){
     return this.http.get("http://localhost:3000/api/accounts");
+  }
+
+  getCustomer(id){
+    return this.http.get("http://localhost:3000/api/accounts/"+id);
   }
 
   deleteCustomer(id){
