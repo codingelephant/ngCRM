@@ -23,7 +23,12 @@
 
           <div class="form-group">
             <label for="">Name</label>
-            <input type="text" name="name" class="form-control" [(ngModel)]="data.name"  />
+            <input type="text" name="name" class="form-control" [(ngModel)]="data.name" #name="ngModel"  required />
+              <div *ngIf="name.invalid && (name.dirty || name.touched)">
+                <p *ngIf="name.hasError('required')">
+                  Please provide your name.
+                </p>
+              </div>
           </div>
           <div class="form-group">
               <label for="">Phone</label>

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CustomerService } from '../../services/customer.service';
 
 import { Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-form',
@@ -15,18 +16,31 @@ export class FormComponent implements OnInit {
   public title:any;
   public btnText:any;
   constructor(private customerSvc: CustomerService,
-    private router: Router) { 
+    private router: Router,
+    private aRoute: ActivatedRoute) { 
 
 
   }
 
   ngOnInit() {
+    //snapshot way
+       // this.id = this.aRoute.snapshot.params.id;
+
+    // observable way
+       this.aRoute.paramMap.subscribe(params => {
+          this.id = params.get('id');
+        });
+
+    //pure js way
     var url = location.href.split("/");
-    this.isEdit = (url[url.length-1]=="edit") ? true : false;
+    this.id = url[4] ? url[4] : 0;
+  //  this.isEdit = (url[url.length-1]=="edit") ? true : false;
+    this.isEdit = (this.id>0) ? true : false;
+
           if(this.isEdit){
-            this.id = url[4];
+            
             this.customerSvc.getCustomer(this.id).subscribe((result:any)=>{
-              
+
                 let d = result.data;
                 this.data = d;
             },
@@ -44,6 +58,8 @@ export class FormComponent implements OnInit {
   }
 
   onFormSubmit(form){
+
+    // console.log(form.controls['name']);
 
     if(form.valid){
 
