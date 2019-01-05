@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CustomerService } from '../../services/customer.service';
 
+import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-form',
   templateUrl: './form.component.html',
@@ -8,7 +10,8 @@ import { CustomerService } from '../../services/customer.service';
 })
 export class FormComponent implements OnInit {
   public data:any = {};
-  constructor(private customerSvc: CustomerService) { 
+  constructor(private customerSvc: CustomerService,
+    private router: Router) { 
 
   }
 
@@ -23,6 +26,7 @@ export class FormComponent implements OnInit {
       this.customerSvc.saveCustomer(this.data).subscribe(
       (res)=>{
         console.log("Successfully created a customer!");
+        this.router.navigate(["/customers"]);
       },
       (err)=>{
         console.log("Something went wrong while creating customer!");

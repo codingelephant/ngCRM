@@ -11,6 +11,16 @@
         </div>
 
         <form action="" #dataForm="ngForm" (submit)="onFormSubmit(dataForm)" method="POST">
+
+            <div class="form-group">
+                <label for="">Type</label>
+                <select name="type" [(ngModel)]="data.type"  id="type" class="form-control" required>
+                  <option value="1">Leads</option>
+                  <option value="2">Customers</option>
+                </select>
+              </div>
+
+
           <div class="form-group">
             <label for="">Name</label>
             <input type="text" name="name" class="form-control" [(ngModel)]="data.name"  />
@@ -36,6 +46,11 @@
           <div class="form-group">
               <label for="">Remarks</label>
               <textarea name="remarks" [(ngModel)]="data.remarks" class="form-control" rows="3"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="">Referer</label>
+            <input type="text" name="referer" class="form-control" [(ngModel)]="data.referer"  />
           </div>
 
           <div class="form-group">

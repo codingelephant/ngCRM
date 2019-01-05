@@ -12,7 +12,15 @@ export class CustomerService {
 
 
   saveCustomer(data){
-    return this.http.post("http://localhost:3000/api/customers", data);
+    return this.http.post("http://localhost:3000/api/accounts", data);
+  }
+
+  getCustomers(){
+    return this.http.get("http://localhost:3000/api/accounts");
+  }
+
+  deleteCustomer(id){
+    return this.http.post("http://localhost:3000/api/accounts/"+id+"/delete", {id:id});
   }
 
 }

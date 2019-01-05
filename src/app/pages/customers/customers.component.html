@@ -27,20 +27,24 @@
             </tr>
           </thead>
           <tbody>
-              <tr>
-                  <td>1</td>
-                  <td>Mya Mya</td>
-                  <td>0937397373</td>
-                  <td>myamya@gmail.com</td>
-                  <td>Ooredoo </td>
-                  <td>No.13, Bogyoke Road, Sule</td>
-                  <td>-</td>
-                  <td>3 days ago</td>
+
+
+              <tr  *ngFor="let customer of customers">
+                  <td>{{  customer.id }}</td>
+                  <td>{{ customer.name }}</td>
+                  <td>{{ customer.phone }}</td>
+                  <td>{{ customer.email }}</td>
+                  <td> {{ customer.company_name }} </td>
+                  <td>{{ customer.address }}</td>
+                  <td>{{ customer.remarks }}</td>
+                  <td>{{ customer.createdAt }}</td>
                   <td>
-                    <a class="btn btn-primary btn-sm mx-1" href="">Edit</a>
-                    <a class="btn btn-danger btn-sm" href="">Remove</a>
+                    <a class="btn btn-primary btn-sm mx-1" routerLink="/customers/{{ customer.id }}/edit">Edit</a>
+                    <button (click)="onDelete(customer.id)" class="btn btn-danger btn-sm" href="">Remove</button>
                   </td>
                 </tr>
+
+
           </tbody>
         </table>
 
