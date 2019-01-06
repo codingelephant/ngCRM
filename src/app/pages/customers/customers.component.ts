@@ -7,8 +7,10 @@ import { CustomerService } from '../../services/customer.service';
   styleUrls: ['./customers.component.css']
 })
 export class CustomersComponent implements OnInit {
+  public loading:Boolean = true;
   public customers:any = [];
   public deleted_id:any;
+  public query:any = {};
   constructor(private cSvc: CustomerService) { 
     
   }
@@ -20,11 +22,37 @@ export class CustomersComponent implements OnInit {
           if(result.success){
             this.customers = result.data;
           }
+          this.loading = false;
       },
       (err)=>{
         console.log(err);
+
+        this.loading = false;
+
       }
     );
+  }
+
+  onSearchFormSubmit(form){
+   // console.log(this.query); 
+   this.loading = true;
+   this.customers = [];
+    this.cSvc.getCustomers(this.query).subscribe(
+      (res)=>{
+          let result:any = res;
+          if(result.success){
+            this.customers = result.data;
+          }
+          this.loading = false;
+      },
+      (err)=>{
+        console.log(err);
+
+        this.loading = false;
+
+      }
+    );
+
   }
   
 
@@ -36,14 +64,17 @@ export class CustomersComponent implements OnInit {
    // let self = this;
     var yes = confirm("Are you sure to delete ?");
     if(yes){
+      this.loading = true;
       //call a service to delete the record 
       this.cSvc.deleteCustomer(id).subscribe((result)=>{
             this.deleted_id = id;
             let deletedIndex = this.customers.findIndex(this.findItemById, this);
             this.customers.splice(deletedIndex,1);
+            this.loading = false;
       },
       (err)=>{
           console.log(err);
+          this.loading = false;
       });
     }
 

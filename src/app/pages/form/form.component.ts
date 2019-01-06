@@ -15,6 +15,7 @@ export class FormComponent implements OnInit {
   public isEdit:Boolean;
   public title:any;
   public btnText:any;
+  public loading:Boolean = false;
   constructor(private customerSvc: CustomerService,
     private router: Router,
     private aRoute: ActivatedRoute) { 
@@ -23,18 +24,22 @@ export class FormComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    //pure js way
+//    var url = location.href.split("/");
+//    this.id = url[4] ? url[4] : 0;
+  //  this.isEdit = (url[url.length-1]=="edit") ? true : false;
+
     //snapshot way
-       // this.id = this.aRoute.snapshot.params.id;
+      //  this.id = this.aRoute.snapshot.params.id;
 
     // observable way
        this.aRoute.paramMap.subscribe(params => {
           this.id = params.get('id');
-        });
+          console.log("url changed");
+       });
 
-    //pure js way
-    var url = location.href.split("/");
-    this.id = url[4] ? url[4] : 0;
-  //  this.isEdit = (url[url.length-1]=="edit") ? true : false;
+
     this.isEdit = (this.id>0) ? true : false;
 
           if(this.isEdit){
@@ -50,18 +55,18 @@ export class FormComponent implements OnInit {
 
           }
 
-
     this.title = (this.isEdit) ? "Edit Account" : "Add New";
     this.btnText = (this.isEdit) ? "Save" : "Submit";
-
-  
   }
 
   onFormSubmit(form){
 
     // console.log(form.controls['name']);
+ 
 
     if(form.valid){
+
+      this.loading = true;
 
       if(this.isEdit){
 

@@ -12,6 +12,33 @@
           <a class="btn btn-success" routerLink="/create">Add New</a>
         </div>
 
+        <p class="text-center">
+          <img *ngIf="loading" src="https://loading.io/spinners/comets/index.comet-spinner.gif" alt="">
+        </p>
+       
+        <form action=""  #searchForm="ngForm" (ngSubmit)="onSearchFormSubmit(searchForm)">
+          <div class="row">
+            <div class="col-md-3">
+              <div class="form-group">
+                <input type="text" class="form-control" name="q" [(ngModel)]="query.q" placeholder="Search by something" />
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="form-group">
+               <input type="date" name="date_from" class="form-control" [(ngModel)]="query.date_from" />
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="form-group">
+               <input type="date" name="date_to" class="form-control" [(ngModel)]="query.date_to" />
+              </div>
+            </div>
+            <div class="col-md-3">
+              <button class="btn btn-primary">Search</button>
+            </div>
+          </div>
+        </form>
+
         <table class="table table-striped">
           <thead>
             <tr>

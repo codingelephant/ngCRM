@@ -19,8 +19,21 @@ export class CustomerService {
     return this.http.put("http://localhost:3000/api/accounts/"+id+"/update", data);
   }
 
-  getCustomers(){
-    return this.http.get("http://localhost:3000/api/accounts");
+  serialize(obj) {
+    var str = [];
+    for (var p in obj)
+      if (obj.hasOwnProperty(p)) {
+        str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+      }
+    return str.join("&");
+  }
+
+  getCustomers(query=null){
+    let qstr = "?";
+    if(query){
+        qstr += this.serialize(query);
+    }
+    return this.http.get("http://localhost:3000/api/accounts"+qstr);
   }
 
   getCustomer(id){
